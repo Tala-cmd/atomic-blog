@@ -9,7 +9,7 @@ function createRandomPost() {
   };
 }
 
-function App() {
+export default function App() {
   const [isFakeDark, setIsFakeDark] = useState(false);
   
   // Whenever `isFakeDark` changes, we toggle the `fake-dark-mode` class on the HTML element (see in "Elements" dev tool).
@@ -33,6 +33,7 @@ function App() {
         <Header />
         <Main />
         <Archive />
+        <Test />
         <Footer />
       </PostProvider>
     </section>
@@ -172,8 +173,40 @@ function Archive() {
   );
 }
 
+export function Word(){
+  const words = Array.from({ length: 20}, ()=> 'WORD')
+
+  return(
+    <ul>
+      {words.map((word,i)=>
+        <li key={i}>
+          {i}: {word}
+        </li>
+      )}
+    </ul>
+  )
+}
+function Counter({ children }){
+  const [count, setCount] = useState(0)
+
+  return(
+    <div>
+      <button onClick={()=> setCount((c)=> c+1)}> Count: {count}</button>
+      {children}
+    </div>
+  )
+}
+
+export function Test(){
+  return(
+    <Counter>
+      <Word />
+    </Counter>
+  )
+}
+
 function Footer() {
   return <footer>&copy; by The Atomic Blog ✌️</footer>;
 }
 
-export default App;
+
